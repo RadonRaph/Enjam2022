@@ -17,13 +17,17 @@ public class ComputeRaytrace : MonoBehaviour
      private int _kernel;
 
      private ComputeBuffer _slimePos;
+
+     private Camera _cam;
     
     // Start is called before the first frame update
     void Start()
     {
         _kernel = computeShader.FindKernel("CSMain");
+        
+        _cam = Camera.main;
 
-        texture = new RenderTexture(512, 512, 24);
+        texture = new RenderTexture(_cam.pixelWidth, _cam.pixelHeight, 24);
         texture.enableRandomWrite = true;
         texture.Create();
         
@@ -31,6 +35,8 @@ public class ComputeRaytrace : MonoBehaviour
         
         _world = World.DefaultGameObjectInjectionWorld;
         _swarmSystem = _world.GetExistingSystemManaged<SwarmSystem>();
+        
+        _slimePos = new ComputeBuffer(1, 3 * 4);
         
         
     }
@@ -40,10 +46,15 @@ public class ComputeRaytrace : MonoBehaviour
     {
 
         var pos = _swarmSystem.entitiesPos;
-        _slimePos = new ComputeBuffer(pos.Length, 3 * 4);
+        if (pos.Length != _slimePos.count)
+        {
+            _slimePos = new ComputeBuffer(pos.Length, 3 * 4);
+        }
+        
+        
         _slimePos.SetData(pos);
         
-       // Camera.main.matri
+        computeShader.SetMatrix("CamVP", _cam.previousViewProjectionMatrix);
         computeShader.SetBuffer(_kernel, "slimePos", _slimePos);
         computeShader.Dispatch(_kernel, texture.width/16,texture.height/16,pos.Length/4);
     }

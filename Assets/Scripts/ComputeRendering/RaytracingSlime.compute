@@ -7,6 +7,8 @@ RWTexture2D<float4> Result;
 
 RWStructuredBuffer<float3> slimePos;
 
+matrix CamVP;
+
 [numthreads(16,16,4)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
