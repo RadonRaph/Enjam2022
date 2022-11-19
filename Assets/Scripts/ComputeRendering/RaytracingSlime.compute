@@ -1,18 +1,74 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
+#pragma kernel SlimePrepass
 
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 RWTexture2D<float4> Result;
 
-RWStructuredBuffer<float3> slimePos;
+
+
+matrix worldToCam;
+matrix projection;
 
 matrix CamVP;
+int slimesCount;
+RWStructuredBuffer<float3> slimePos;
+float3 camPos;
+int width;
+int height;
+float2 ratio;
 
-[numthreads(16,16,4)]
+
+//RWStructuredBuffer<float3> slimeScreenPos;
+
+
+[numthreads(1,1,1)]
+void SlimePrepass(uint3 id : SV_DispatchThreadID)
+{
+    float3 objInCam = slimePos[id.x]-camPos;
+
+   // objInCam = mul(slimePos[id.x], worldToCam);
+
+    float4 posF4 = mul(objInCam, worldToCam);
+   // float4 posF4 =  float4(objInCam, 1);
+   // float4 pos = mul(CamVP, posF4);
+    float4 pos = mul (posF4, projection);
+
+    float2 posScreen = pos.xy/pos.w;
+    posScreen =  float2(posScreen.x *ratio.x, posScreen.y*ratio.y);
+    posScreen = posScreen + float2(0.5, 0.5);
+   // posScreen.y = 1-posScreen.y;
+
+    posScreen = posScreen * float2(width, height);
+
+    slimePos[id.x] = float3(posScreen, pos.w);
+}
+
+[numthreads(32,32,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
     // TODO: insert actual code here!
 
-    Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+    float3 color = float3(0,0,0);
+    
+    for (int i = 0; i < slimesCount; i++)
+    {
+
+        //*clamp(sign(pos.z), 0,1)
+        float3 pos = slimePos[i];
+        float d = distance(pos.xy, id.xy);
+
+        float s = 100-(2*abs(pos.z));
+        float p = clamp(100-d, 0 ,1)*clamp(sign(pos.z),0,1);
+
+        color += float3(p,p,p);
+    }
+
+    color = color;
+
+    Result[id.xy] = float4(color, 0.5);
 }
+
+
+

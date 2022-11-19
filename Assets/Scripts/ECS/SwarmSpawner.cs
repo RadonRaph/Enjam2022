@@ -68,7 +68,7 @@ public class SwarmSpawner : MonoBehaviour
         _world = World.DefaultGameObjectInjectionWorld;
         _manager = _world.EntityManager;
 
-        _ecb = new EntityCommandBuffer(Allocator.TempJob);
+        _ecb = new EntityCommandBuffer(Allocator.TempJob, PlaybackPolicy.MultiPlayback);
 
         _meshArray = new RenderMeshArray(new List<Material> {material}.ToArray(), new List<Mesh> {mesh}.ToArray());
 
