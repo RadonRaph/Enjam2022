@@ -12,6 +12,9 @@ using Unity.Transforms;
 public partial class SwarmSystem : SystemBase
 {
     public EntityQuery Query;
+    public Transform Target;
+
+    public NativeArray<Vector3> entitiesPos;
 
     private float3[] _targetRays;
     private float3[] _repulsionRays;
@@ -31,16 +34,23 @@ public partial class SwarmSystem : SystemBase
 
         int count = Query.CalculateEntityCount();
 
+
+        entitiesPos = new NativeArray<Vector3>(count, Allocator.Persistent);
+
+        for (int i = 0; i < count; i++)
+        {
+            entitiesPos[i] = entitiesTransforms[i].Value.Position;
+        }
+
         NativeArray<float3> targetRays = new NativeArray<float3>(count, Allocator.TempJob);
         NativeArray<float3> repulsionRays = new NativeArray<float3>(count, Allocator.TempJob);
         NativeArray<float3> startRays = new NativeArray<float3>(count, Allocator.TempJob);
         
-        float3 target = new float3(0, 0, 0);
+        float3 target = Target.position;
         
-        Debug.Log(entitiesTransforms.Length);
         
 
-        JobHandle handle = Entities.WithReadOnly(entitiesTransforms).WithAll<SwarmAgentComponent>().ForEach(
+         Entities.WithReadOnly(entitiesTransforms).WithAll<SwarmAgentComponent>().ForEach(
             (int entityInQueryIndex, ref LocalToWorldTransform trans, ref SwarmAgentComponent swarm) =>
             {
 
@@ -50,7 +60,7 @@ public partial class SwarmSystem : SystemBase
                 
                 float3 repulsionVector = float3.zero;
 
-                for (int i = 0; i < entitiesTransforms.Length; i++)
+                for (int i = 0; i < entitiesTransforms.Length; i+=5)
                 {
                     LocalToWorldTransform otherTrans = entitiesTransforms[i];
 
@@ -58,9 +68,13 @@ public partial class SwarmSystem : SystemBase
                     float3 dir = math.normalize(otherTrans.Value.Position - trans.Value.Position+antiNan);
                     float dist = math.distance(trans.Value.Position, otherTrans.Value.Position);
                     
+                    
+                    if (math.isnan(dir).x || math.isnan(dist))
+                        continue;
+                    
+                    
 
-                    float force = math.clamp(10 - dist, 0, 10)*0.1f;
-                    force = 0.001f;
+                    float force = math.clamp(5 - dist, 0, 5)*0.1f;
 
                     repulsionVector += force * dir;
 
@@ -68,20 +82,28 @@ public partial class SwarmSystem : SystemBase
 
                 targetRays[entityInQueryIndex] = targetVector * targetDist; 
                 repulsionRays[entityInQueryIndex] = repulsionVector; 
-                startRays[entityInQueryIndex] = trans.Value.Position; 
+                startRays[entityInQueryIndex] = trans.Value.Position;
+
+                float3 gravity = new float3(0, -9.81f, 0);
                 
-                float3 moveVector = (targetVector * targetDist * 0.1f) - repulsionVector * 0.01f;
+                float3 moveVector = (targetVector * targetDist * 0.1f) - repulsionVector * 0.1f + gravity*0.1f;
 
                 moveVector = math.normalize(moveVector);
 
                 swarm.debug = repulsionVector;
+                swarm.Velocity *= 0.95f;
+                swarm.Velocity += moveVector;
 
-                trans.Value.Position += moveVector*0.1f;
-               //trans.Value.Position += targetVector*0.1f;
+                trans.Value.Position += swarm.Velocity*0.1f;
+                if (trans.Value.Position.y < 0)
+                    trans.Value.Position.y = 0;
+
+                //trans.Value.Position += targetVector*0.1f;
 
             }
-        ).WithStoreEntityQueryInField(ref Query).ScheduleParallel(Dependency);
+        ).WithStoreEntityQueryInField(ref Query).ScheduleParallel();
         
+        /*
         handle.Complete();
 
         for (int i = 0; i < count; i++)
@@ -89,6 +111,6 @@ public partial class SwarmSystem : SystemBase
             Debug.DrawRay(startRays[i], targetRays[i], Color.green);
             Debug.DrawRay(startRays[i], repulsionRays[i], Color.red);
         }
-
+*/
     }
 }
