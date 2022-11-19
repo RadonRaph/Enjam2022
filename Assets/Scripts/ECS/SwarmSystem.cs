@@ -45,12 +45,17 @@ public partial class SwarmSystem : SystemBase
         NativeArray<float3> targetRays = new NativeArray<float3>(count, Allocator.TempJob);
         NativeArray<float3> repulsionRays = new NativeArray<float3>(count, Allocator.TempJob);
         NativeArray<float3> startRays = new NativeArray<float3>(count, Allocator.TempJob);
-        
-        float3 target = Target.position;
-        
-        
 
-         Entities.WithReadOnly(entitiesTransforms).WithAll<SwarmAgentComponent>().ForEach(
+        float3 target = float3.zero;
+        
+        if (Target != null)
+        {
+             target = Target.position;
+        }
+
+
+
+        Entities.WithReadOnly(entitiesTransforms).WithAll<SwarmAgentComponent>().ForEach(
             (int entityInQueryIndex, ref LocalToWorldTransform trans, ref SwarmAgentComponent swarm) =>
             {
 

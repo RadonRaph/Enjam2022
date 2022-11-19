@@ -43,6 +43,7 @@ public class ComputeRaytrace : MonoBehaviour
         _slimePos = new ComputeBuffer(pos.Length, 3 * 4);
         _slimePos.SetData(pos);
         
+       // Camera.main.matri
         computeShader.SetBuffer(_kernel, "slimePos", _slimePos);
         computeShader.Dispatch(_kernel, texture.width/16,texture.height/16,pos.Length/4);
     }
