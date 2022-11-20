@@ -25,6 +25,9 @@ public class ComputeRaytrace : MonoBehaviour
      public RawImage rawImage;
 
      public Vector2 ratio;
+     public Vector2 offset;
+
+     public Material fullscreenMat;
     
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,7 @@ public class ComputeRaytrace : MonoBehaviour
         texture.Create();
         
         computeShader.SetTexture(_kernel, "Result", texture);
+        computeShader.SetTexture(2, "Result", texture);
         
         _world = World.DefaultGameObjectInjectionWorld;
         _swarmSystem = _world.GetExistingSystemManaged<SwarmSystem>();
@@ -61,20 +65,29 @@ public class ComputeRaytrace : MonoBehaviour
         
         if (count != _slimePos.count)
         {
+            if (_slimePos.IsValid())
+                _slimePos.Dispose();
+            
             _slimePos = new ComputeBuffer(pos.Length, 3 * 4);
         }
 
-        Vector3[] debugPos = new Vector3[2];
+        Vector3[] debugPos = new Vector3[1];
         debugPos[0] = Vector3.zero;
-        debugPos[1] = Vector3.one;
+
 
         
         _slimePos.SetData(pos);
         
+        fullscreenMat.SetInt("slimesCount", count);
+        fullscreenMat.SetVector("camPos", _cam.transform.position);
+        fullscreenMat.SetBuffer("slimes", _slimePos);
+
+        /*
         computeShader.SetInt("slimesCount", count);
         computeShader.SetInt("width", texture.width);
         computeShader.SetInt("height", texture.height);
         computeShader.SetVector("ratio", ratio);
+        computeShader.SetVector("offset", offset);
         
         computeShader.SetMatrix("CamVP", _cam.previousViewProjectionMatrix);
         computeShader.SetMatrix("worldToCam", _cam.worldToCameraMatrix);
@@ -82,12 +95,18 @@ public class ComputeRaytrace : MonoBehaviour
 
         computeShader.SetVector("camPos", _cam.transform.position);
         
+        computeShader.SetVector("ray",Camera.main.gameObject.transform.position);
+        
         computeShader.SetBuffer(_kernel, "slimePos", _slimePos);
         computeShader.SetBuffer(_prepassKernel, "slimePos", _slimePos);
 
-        computeShader.Dispatch(_prepassKernel, Mathf.CeilToInt(count),1,1);
+       // computeShader.Dispatch(_prepassKernel, Mathf.CeilToInt(count),1,1);
 
-        computeShader.Dispatch(_kernel,  Mathf.CeilToInt(texture.width/32f),Mathf.CeilToInt(texture.height/32f),1);
+        //computeShader.Dispatch(_kernel,  Mathf.CeilToInt(texture.width/32f),Mathf.CeilToInt(texture.height/32f),1);
+        
+        computeShader.Dispatch(2,texture.width/8,texture.height/8,1);
+
+        Material m;
 
         /*
         
