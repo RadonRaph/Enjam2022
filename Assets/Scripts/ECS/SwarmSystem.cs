@@ -65,7 +65,7 @@ public partial class SwarmSystem : SystemBase
                 
                 float3 repulsionVector = float3.zero;
 
-                for (int i = 0; i < entitiesTransforms.Length; i+=5)
+                for (int i = entityInQueryIndex%5; i < entitiesTransforms.Length; i+=5)
                 {
                     LocalToWorldTransform otherTrans = entitiesTransforms[i];
 
