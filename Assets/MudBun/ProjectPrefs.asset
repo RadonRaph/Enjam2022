@@ -22,7 +22,4 @@ MonoBehaviour:
   - Key: LastLoadedRequiredPackagesRevision
     Type: 1
     Value: 36
-  - Key: RequiredPacakgesLoaded
-    Type: 4
-    Value: mudbun-hdrp-shaders
   m_revision: 36
