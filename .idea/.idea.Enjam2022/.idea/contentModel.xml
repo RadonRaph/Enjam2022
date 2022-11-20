@@ -9,6 +9,234 @@
       <e p="Assembly-CSharp.Player.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Material" t="Include" />
+        <e p="MudBun" t="Include">
+          <e p="Amplify Shader Editor" t="Include">
+            <e p="Helper" t="Include" />
+          </e>
+          <e p="Compatibility" t="Include" />
+          <e p="Customization" t="Include">
+            <e p="CustomBone.cginc" t="Include" />
+            <e p="CustomBrush.cginc" t="Include" />
+            <e p="CustomDistortion.cs" t="Include" />
+            <e p="CustomModifier.cs" t="Include" />
+            <e p="CustomRayTracedVoxels.cginc" t="Include" />
+            <e p="CustomSolid.cs" t="Include" />
+            <e p="Editor" t="Include">
+              <e p="CustomCreationMenu.cs" t="Include" />
+              <e p="MudBun.Customization.Editor.asmdef" t="Include" />
+            </e>
+            <e p="README.txt" t="Include" />
+          </e>
+          <e p="Material" t="Include">
+            <e p="HDRP" t="Include">
+              <e p="Presets" t="Include" />
+            </e>
+          </e>
+          <e p="MudBun.asmdef" t="Include" />
+          <e p="MudBun.cs" t="Include" />
+          <e p="README.txt" t="Include" />
+          <e p="Resources" t="Include">
+            <e p="Compute" t="Include">
+              <e p="DualContouring.compute" t="Include" />
+              <e p="DualMeshing.compute" t="Include" />
+              <e p="MarchingCubes.compute" t="Include" />
+              <e p="MeshLock.compute" t="Include" />
+              <e p="NoiseCache.compute" t="Include" />
+              <e p="RaytracedVoxels.compute" t="Include" />
+              <e p="SdfGen.compute" t="Include" />
+              <e p="SurfaceNets.compute" t="Include" />
+              <e p="TextureSlicer.compute" t="Include" />
+              <e p="VoxelGen.compute" t="Include" />
+            </e>
+            <e p="Render" t="Include">
+              <e p="HDRP" t="Include" />
+            </e>
+          </e>
+          <e p="Script" t="Include">
+            <e p="AABB.cs" t="Include" />
+            <e p="AabbTree.cs" t="Include" />
+            <e p="BitArray.cs" t="Include" />
+            <e p="Bits32.cs" t="Include" />
+            <e p="Codec.cs" t="Include" />
+            <e p="CommonData.cs" t="Include" />
+            <e p="ComputeManager.cs" t="Include" />
+            <e p="Distortion" t="Include">
+              <e p="MudFishEye.cs" t="Include" />
+              <e p="MudPinch.cs" t="Include" />
+              <e p="MudQuantize.cs" t="Include" />
+              <e p="MudTwist.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="CompatibilityManager.cs" t="Include" />
+              <e p="CreationMenu.cs" t="Include" />
+              <e p="DecalMeshMaterialEditor.cs" t="Include" />
+              <e p="Editor Resources" t="Include" />
+              <e p="MudBrushEditor.cs" t="Include" />
+              <e p="MudBun.Editor.asmdef" t="Include" />
+              <e p="MudBunEditorWindowBase.cs" t="Include" />
+              <e p="MudBunMenu.cs" t="Include" />
+              <e p="MudBunQuickCreationWindow.cs" t="Include" />
+              <e p="MudBunStartScreen.cs" t="Include" />
+              <e p="MudEditorBase.cs" t="Include" />
+              <e p="MudEditorWindowBase.cs" t="Include" />
+              <e p="MudMeshMultiTexturedMaterialEditor.cs" t="Include" />
+              <e p="MudMeshSingleTexturedMaterialEditor.cs" t="Include" />
+              <e p="MudRendererBaseEditor.cs" t="Include" />
+              <e p="MudRendererEditor.cs" t="Include" />
+              <e p="MudSplatMultiTexturedMaterialEditor.cs" t="Include" />
+              <e p="MudSplatSingleTexturedMaterialEditor.cs" t="Include" />
+              <e p="ProjectPrefs.cs" t="Include" />
+            </e>
+            <e p="Effect" t="Include">
+              <e p="MudNoiseVolume.cs" t="Include" />
+              <e p="MudParticleSystem.cs" t="Include" />
+            </e>
+            <e p="Manager" t="Include">
+              <e p="Janitor.cs" t="Include" />
+              <e p="MudBun.Manager.asmdef" t="Include" />
+              <e p="Singleton.cs" t="Include" />
+            </e>
+            <e p="MarchingCubes.cs" t="Include" />
+            <e p="Modifier" t="Include">
+              <e p="MudNoiseModifier.cs" t="Include" />
+              <e p="MudOnion.cs" t="Include" />
+            </e>
+            <e p="MudBrush.cs" t="Include" />
+            <e p="MudBrushBase.cs" t="Include" />
+            <e p="MudBrushGroup.cs" t="Include" />
+            <e p="MudBunConfig.cs" t="Include" />
+            <e p="MudDistortion.cs" t="Include" />
+            <e p="MudLockedMeshRenderer.cs" t="Include" />
+            <e p="MudMaterial.cs" t="Include" />
+            <e p="MudMaterialBase.cs" t="Include" />
+            <e p="MudModifier.cs" t="Include" />
+            <e p="MudRenderer.cs" t="Include" />
+            <e p="MudRendererBase.cs" t="Include" />
+            <e p="MudSharedMaterial.cs" t="Include" />
+            <e p="MudSharedMaterialBase.cs" t="Include" />
+            <e p="MudSolid.cs" t="Include" />
+            <e p="MudStandardMeshRenderer.cs" t="Include" />
+            <e p="Primitive" t="Include">
+              <e p="MudBox.cs" t="Include" />
+              <e p="MudCone.cs" t="Include" />
+              <e p="MudCurveFull.cs" t="Include" />
+              <e p="MudCurveSimple.cs" t="Include" />
+              <e p="MudCylinder.cs" t="Include" />
+              <e p="MudSolidAngle.cs" t="Include" />
+              <e p="MudSphere.cs" t="Include" />
+              <e p="MudTorus.cs" t="Include" />
+            </e>
+            <e p="RegisterSdfBrushEvalFuncAttribute.cs" t="Include" />
+            <e p="SdfBrush.cs" t="Include" />
+            <e p="SdfEval.cs" t="Include" />
+            <e p="SelectionManager.cs" t="Include" />
+            <e p="Util" t="Include">
+              <e p="Assert.cs" t="Include" />
+              <e p="Component" t="Include">
+                <e p="MudFloater.cs" t="Include" />
+                <e p="MudNoiseScroller.cs" t="Include" />
+              </e>
+              <e p="ConditionalFieldAttribute.cs" t="Include" />
+              <e p="ConditionalFieldAttributeDrawer.cs" t="Include" />
+              <e p="GizmosUtil.cs" t="Include" />
+              <e p="MathUtil.cs" t="Include" />
+              <e p="MeshUtil.cs" t="Include" />
+              <e p="MudTexturePacker.cs" t="Include" />
+              <e p="ObjectPool.cs" t="Include" />
+              <e p="PathUtil.cs" t="Include" />
+              <e p="QuaternionUtil.cs" t="Include" />
+              <e p="ResourcesUtil.cs" t="Include" />
+              <e p="ResourcesUtilEditor.cs" t="Include" />
+              <e p="TextureUtil.cs" t="Include" />
+              <e p="Validate.cs" t="Include" />
+              <e p="VectorUtil.cs" t="Include" />
+            </e>
+            <e p="Voxel.cs" t="Include" />
+          </e>
+          <e p="Shader" t="Include">
+            <e p="AabbTreeDefs.cginc" t="Include" />
+            <e p="AabbTreeFuncs.cginc" t="Include" />
+            <e p="AllocationDefs.cginc" t="Include" />
+            <e p="AutoSmoothDefs.cginc" t="Include" />
+            <e p="AutoSmoothFuncs.cginc" t="Include" />
+            <e p="BoneFuncs.cginc" t="Include" />
+            <e p="BrushDefs.cginc" t="Include" />
+            <e p="BrushFuncs.cginc" t="Include" />
+            <e p="BrushMaskDefs.cginc" t="Include" />
+            <e p="BrushMaskFuncs.cginc" t="Include" />
+            <e p="CameraDefs.cginc" t="Include" />
+            <e p="ComputeCommon.cginc" t="Include" />
+            <e p="Decal.cginc" t="Include" />
+            <e p="DualMeshingFuncs.cginc" t="Include" />
+            <e p="GenPointDefs.cginc" t="Include" />
+            <e p="IndirectArgsDefs.cginc" t="Include" />
+            <e p="MarchingCubesDefs.cginc" t="Include" />
+            <e p="MarchingCubesFuncs.cginc" t="Include" />
+            <e p="Math" t="Include">
+              <e p="CatmullRom.cginc" t="Include" />
+              <e p="Codec.cginc" t="Include" />
+              <e p="Color.cginc" t="Include" />
+              <e p="Geometry.cginc" t="Include" />
+              <e p="MathConst.cginc" t="Include" />
+              <e p="Quaternion.cginc" t="Include" />
+              <e p="Vector.cginc" t="Include" />
+            </e>
+            <e p="MeshingModeDefs.cginc" t="Include" />
+            <e p="Noise" t="Include">
+              <e p="CachedNoise3D.cginc" t="Include" />
+              <e p="ClassicNoise2D.cginc" t="Include" />
+              <e p="ClassicNoise3D.cginc" t="Include" />
+              <e p="Noise.cginc" t="Include" />
+              <e p="NoiseCommon.cginc" t="Include" />
+              <e p="RandomNoise.cginc" t="Include" />
+              <e p="SimplexNoise2D.cginc" t="Include" />
+              <e p="SimplexNoise3D.cginc" t="Include" />
+              <e p="TriangleNoise3D.cginc" t="Include" />
+            </e>
+            <e p="NormalDefs.cginc" t="Include" />
+            <e p="NormalFuncs.cginc" t="Include" />
+            <e p="RayMarching.cginc" t="Include" />
+            <e p="Render" t="Include">
+              <e p="HDRP" t="Include">
+                <e p="MudDecalHDRP.shader" t="Include" />
+                <e p="MudLockedMeshHDRP.shader" t="Include" />
+                <e p="MudMeshMultiTexturedHDRP.shader" t="Include" />
+                <e p="MudMeshSingleTexturedHDRP.shader" t="Include" />
+                <e p="MudSplatMultiTexturedHDRP.shader" t="Include" />
+                <e p="MudSplatSingleTexturedHDRP.shader" t="Include" />
+                <e p="Presets" t="Include">
+                  <e p="AlphaBlendedTransparentMeshHDRP.shader" t="Include" />
+                  <e p="FloaterSplatHDRP.shader" t="Include" />
+                  <e p="OutlineMeshHDRP.shader" t="Include" />
+                  <e p="SdfRippleHDRP.shader" t="Include" />
+                  <e p="StopmotionMeshHDRP.shader" t="Include" />
+                  <e p="StopmotionSplatHDRP.shader" t="Include" />
+                </e>
+              </e>
+              <e p="MeshCommon.cginc" t="Include" />
+              <e p="RayTracedVoxelsCommon.cginc" t="Include" />
+              <e p="ShaderCommon.cginc" t="Include" />
+              <e p="SplatCommon.cginc" t="Include" />
+            </e>
+            <e p="RenderModeDefs.cginc" t="Include" />
+            <e p="SDF" t="Include">
+              <e p="Operators.cginc" t="Include" />
+              <e p="Primitives.cginc" t="Include" />
+              <e p="SDF.cginc" t="Include" />
+              <e p="Util.cginc" t="Include" />
+            </e>
+            <e p="VoxelCacheDefs.cginc" t="Include" />
+            <e p="VoxelCacheFuncs.cginc" t="Include" />
+            <e p="VoxelDefs.cginc" t="Include" />
+            <e p="VoxelFuncs.cginc" t="Include" />
+            <e p="VoxelHashDefs.cginc" t="Include" />
+            <e p="VoxelHashFuncs.cginc" t="Include" />
+            <e p="VoxelModeDefs.cginc" t="Include" />
+          </e>
+          <e p="Texture" t="Include">
+            <e p="clay.txt" t="Include" />
+          </e>
+        </e>
         <e p="OutdoorsScene" t="Include" />
         <e p="polyperfect" t="Include">
           <e p="Low Poly Ultimate Pack" t="Include">
